@@ -6,6 +6,7 @@
 <div class="container my-5">
     <div class="card">
         <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center ">
+            <h2> School Teachers</h2>
             <b> Teachers Employment Contract</b>
             <h1>Hello teachers</h1>
             <a href="{{ url('teacher') }}" class="btn btn-primary">Go Back</a>
