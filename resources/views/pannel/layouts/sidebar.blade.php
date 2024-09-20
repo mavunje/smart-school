@@ -185,6 +185,17 @@
 
 
         <li class="nav-item">
+            <a class="nav-link
+             @if (Request::segment(2) != 'setting') collapsed @endif"
+                href="{{ url('teacher') }}">
+                <i class="bi bi-envelope"></i>
+                <span>Manage Teachers</span>
+            </a>
+        </li>
+
+
+{{--
+        <li class="nav-item">
             <a class="nav-link @if (Request::segment(2) != 'academics') collapsed @endif" data-bs-target="#parent-section"
                 data-bs-toggle="collapse" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i><span>Parents</span><i
@@ -305,7 +316,7 @@
                 </li>
             </ul>
         </li>
-
+ --}}
 
 
 
