@@ -54,16 +54,17 @@
         <div class="container-fluid login-container">
 
             <div class="login-box">
-<h1 class="text-center py-3 text-primary">SCHOOL MANAGEMENT SYSTEM</h1>
+                <h1 class="text-center py-3 text-primary">SCHOOL MANAGEMENT SYSTEM</h1>
                 <div class="card">
                     <div class="card-body">
                         <div class="pt-2 pb-2">
-                            <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                            <p class="text-center small"><b>Enter your Email & password to login</b></p>
+                            <h5 class="card-title text-center pb-0 fs-4">Login to Your Account </h5>
+                            <p class="text-center small"><b>Enter your Email & password to login </b></p>
                         </div>
 
                         @include('message')
-
+                        <p>Hello</p>
+                        
                         <form class="row g-3" action="" method="POST">
 
                             {{ csrf_field() }}
@@ -72,7 +73,8 @@
                                 <label for="Email" class="form-label">Email</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                    <input type="text" name="email" class="form-control" id="youremail" required placeholder="Enter your email">
+                                    <input type="text" name="email" class="form-control" id="youremail" required
+                                        placeholder="Enter your email">
                                     <div class="invalid-feedback">Please enter your Email.</div>
                                 </div>
                             </div>
@@ -80,14 +82,13 @@
                             <div class="col-12">
                                 <label for="yourPassword" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" id="yourPassword" required
-                                placeholder="Enter your password">
+                                    placeholder="Enter your password">
                                 <div class="invalid-feedback">Please enter your password!</div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember"
-                                        id="rememberMe">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="rememberMe">
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                             </div>

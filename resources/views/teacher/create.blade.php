@@ -18,6 +18,7 @@
                 <!-- Personal Information -->
                 <fieldset class="mb-4">
                     <legend class="h5">Personal Information</legend>
+                    <p>Secrete information</p>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="fullName" class="form-label">First Name</label>
