@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center ">
             <b> Teachers Employment Contract</b>
-            <h1>Hello teachers</h1>
+           <p>New employment</p>
             <a href="{{ url('teacher') }}" class="btn btn-primary">Go Back</a>
         </div>
         <div class="card-body">
