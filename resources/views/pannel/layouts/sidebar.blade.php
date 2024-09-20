@@ -183,6 +183,139 @@
         </li>
         @endif
 
+
+        <li class="nav-item">
+            <a class="nav-link @if (Request::segment(2) != 'academics') collapsed @endif" data-bs-target="#parent-section"
+                data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Parents</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="parent-section" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Fees</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Online Courses</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Class Timetable</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Lesson Plan</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Syllabus Status</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Homework</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Online Exam</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Attendance</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link @if (Request::segment(2) != 'store') collapsed @endif" data-bs-target="#exam-section"
+                        data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-bar-chart"></i><span>Examinations</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="exam-section" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="charts-chartjs.html">
+                                <i class="bi bi-circle"></i><span>Exam Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="charts-apexcharts.html">
+                                <i class="bi bi-circle"></i><span>Exam Result</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>NoticeBoard</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link @if (Request::segment(2) != 'store') collapsed @endif" data-bs-target="#library-section"
+                        data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-bar-chart"></i><span>Library</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="library-section" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="charts-chartjs.html">
+                                <i class="bi bi-circle"></i><span>Books</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="charts-apexcharts.html">
+                                <i class="bi bi-circle"></i><span>Book Issued</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Transport routes</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('admin/viewstudent') }}">
+                        <i class="bi bi-circle"></i><span>Hostel Rooms</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
         <!-- End Tables Nav -->
 
         @if (!empty($permissionAccounts))
