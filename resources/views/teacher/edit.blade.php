@@ -6,6 +6,7 @@
         <div class="card">
             <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center ">
                 <b> Teachers Employment Contract</b>
+                <p>welcome</p>
                 <a href="{{ url('teacher') }}" class="btn btn-primary">Go Back</a>
             </div>
             <div class="card-body">
