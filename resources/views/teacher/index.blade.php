@@ -2,8 +2,9 @@
 
 
 @section('content')
-<h2 class="text-center"><b>General Teachers Informations</b></h2>
-    <div class="left-64 w-full ">
+    <h2 class="text-center"><b>General Teachers Informations</b></h2>
+    {{-- <div class="left-64 w-full"> --}}
+    <div class="left-64" style=" overflow: hidden;">
         <div class="container mt-4">
             <div class="d-flex flex-wrap justify-content-between">
                 <!-- Card 1 -->
@@ -530,14 +531,14 @@
 
 
         @if (session('success'))
-    <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+            <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
 
-        <div class="d-flex ">
+        <div class="d-flex container-fluid">
             <div class="card col-10">
                 <div class="card-body">
                     <h5 class="text-decoration-none"><b>A List of All Teachers In the school</b></h5>
@@ -571,56 +572,58 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($teachers as $teacher )
-                            <tr>
-                                <td>{{ $teacher->id }}</td>
-                                <td>{{ $teacher->fname }}</td>
-                                <td>{{ $teacher->lname }}</td>
-                                <td>{{ $teacher->gender }}</td>
-                                <td>{{ $teacher->email }}</td>
-                                <td>{{ $teacher->phone }}</td>
-                                <td class="p-2 text-sm font-medium">
-                                    <a href="{{route('teacher.edit',$teacher->id ) }}"
-                                        class="btn btn-primary btn-sm d-inline-flex align-items-center me-2">
-                                        <i class="fas fa-edit me-1"></i> Edit
-                                    </a>
-                                    <form action="{{route('teacher.destroy',$teacher->id ) }}" method="POST" class="d-inline-flex">
-                                         @csrf
-                              @method('DELETE')
+                            @foreach ($teachers as $teacher)
+                                <tr>
+                                    <td>{{ $teacher->id }}</td>
+                                    <td>{{ $teacher->fname }}</td>
+                                    <td>{{ $teacher->lname }}</td>
+                                    <td>{{ $teacher->gender }}</td>
+                                    <td>{{ $teacher->email }}</td>
+                                    <td>{{ $teacher->phone }}</td>
+                                    <td class="p-2 text-sm font-medium">
+                                        <a href="{{ route('teacher.edit', $teacher->id) }}"
+                                            class="btn btn-primary btn-sm d-inline-flex align-items-center me-2">
+                                            <i class="fas fa-edit me-1"></i> Edit
+                                        </a>
+                                        <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST"
+                                            class="d-inline-flex">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button type="submit"
-                                            class="btn btn-danger btn-sm d-inline-flex align-items-center">
-                                            <i class="fas fa-trash-alt me-1"></i> Delete
-                                        </button>
-                                    </form>
-                                </td>
+                                            <button type="submit"
+                                                class="btn btn-danger btn-sm d-inline-flex align-items-center">
+                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
 
 
-                            </tr>
-
+                                </tr>
                             @endforeach
 
                         </tbody>
                     </table>
                     <!-- End Bordered Table -->
-                    {{$teachers->links()}}
+                    {{ $teachers->links() }}
 
 
                 </div>
             </div>
 
 
-            <div class="container text-center mt-5">
-                <h3>Send a Message</h3>
-                <div class="d-flex justify-content-center">
-                    <a href="https://wa.me/?text=Hello" class="text-decoration-none mx-3" title="Send via WhatsApp"
+            <div class="col-2 text-center pt-5">
+                <div class="">
+                    <h3>Send a Message</h3>
+                </div>
+                <div class="d-flex flex-column justify-content-between">
+                    <a href="https://wa.me/?text=Hello" class=" text-decoration-none mx-3 mb-3" title="Send via WhatsApp"
                         target="_blank">
                         <i class="fab fa-whatsapp fa-3x text-success"></i>
                     </a>
-                    <a href="mailto:someone@example.com" class="text-decoration-none mx-3" title="Send via Email">
+                    <a href="mailto:someone@example.com" class="text-decoration-none mx-3 mb-3" title="Send via Email">
                         <i class="fas fa-envelope fa-3x text-primary"></i>
                     </a>
-                    <a href="sms:+1234567890" class="text-decoration-none mx-3" title="Send a Message">
+                    <a href="sms:+1234567890" class="text-decoration-none mx-3 mb-3" title="Send a Message">
                         <i class="fas fa-sms fa-3x text-info"></i>
                     </a>
                 </div>

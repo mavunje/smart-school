@@ -42,6 +42,16 @@
         .login-box {
             width: 100%;
             max-width: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .login-page {
+            width: 100%;
+            height: 100vh;
+            position: relative;
         }
     </style>
 
@@ -51,20 +61,20 @@
 
     <main>
 
-        <div class="container-fluid login-container">
+        <div class="login-page container-fluid login-container">
 
             <div class="login-box">
-                <h1 class="text-center py-3 text-primary">SCHOOL MANAGEMENT SYSTEM</h1>
-                <div class="card">
+                <h4 class="fs-4 fw-bold text-center py-3 text-primary">SCHOOL MANAGEMENT SYSTEM</h4>
+                <div class="card p-4 mb-4">
                     <div class="card-body">
-                        <div class="pt-2 pb-2">
+                        <div class="pt-2 pb-2 mb-3 border-bottom ">
                             <h5 class="card-title text-center pb-0 fs-4">Login to Your Account </h5>
                             <p class="text-center small"><b>Enter your Email & password to login </b></p>
                         </div>
 
+
                         @include('message')
-                        <p>Hello</p>
-                        
+
                         <form class="row g-3" action="" method="POST">
 
                             {{ csrf_field() }}
@@ -98,8 +108,7 @@
                         </form>
                     </div>
                 </div>
-
-                <footer class="footer mt-3 text-center">
+                <footer class="footer mt-3 text-center border-top">
                     <div class="copyright">
                         &copy; Copyright <strong><span>Kaengesa Seminary</span></strong>. All Rights Reserved
                     </div>
@@ -107,7 +116,9 @@
                         Designed by <a href="">Kennedy Richard Sinkonde</a>
                     </div>
                 </footer>
+
             </div>
+
         </div>
 
     </main>

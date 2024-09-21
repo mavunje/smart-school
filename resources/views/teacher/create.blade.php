@@ -7,8 +7,8 @@
     <div class="card">
         <div class="card-header bg-light text-dark d-flex justify-content-between align-items-center ">
             <h2> School Teachers</h2>
-            <b> Teachers Employment Contract</b>
-           <p>New employment</p>
+<p></p>
+
             <a href="{{ url('teacher') }}" class="btn btn-primary">Go Back</a>
         </div>
         <div class="card-body">
@@ -18,7 +18,8 @@
                 <!-- Personal Information -->
                 <fieldset class="mb-4">
                     <legend class="h5">Personal Information</legend>
-                    <p>Secrete information</p>
+
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="fullName" class="form-label">First Name</label>
