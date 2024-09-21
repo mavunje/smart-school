@@ -850,6 +850,33 @@
 
 
 
+        <li class="nav-item">
+
+            <a class="nav-link
+     @if (Request::segment(2) != 'role') collapsed @endif"
+                href="{{ url('position') }}">
+                <i class="bi bi-envelope"></i>
+                <span>Positions Management</span>
+            </a>
+        </li>
+
+
+
+        <li class="nav-item">
+
+            <a class="nav-link
+     @if (Request::segment(2) != 'role') collapsed @endif"
+                href="{{ url('workers') }}">
+                <i class="bi bi-envelope"></i>
+                <span>Workers Management</span>
+            </a>
+        </li>
+
+
+
+
+
+
         @if (!empty($permissionCategory))
             <li class="nav-item">
                 <a class="nav-link

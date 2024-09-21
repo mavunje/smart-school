@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login']);
@@ -76,3 +78,12 @@ Route::resource('form6', Form6Controller::class);
 Route::get('admin/viewstudent', function () {
     return view('admin.viewstudent'); // Ensure this file exists at resources/views/admin/viewstudent.blade.php
 });
+
+ //WORKERS CONTROLLER
+Route::resource('workers', WorkerController::class);
+
+
+//POSITION CONTROLLER
+Route::resource('position', PositionController::class);
+
+Route::middleware('auth')->get('/user-info', [UserController::class, 'getUserInfo']);

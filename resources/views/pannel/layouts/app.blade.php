@@ -9,9 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Favicons -->
+    {{-- <!-- Favicons -->
     <link href=" {{ asset('assets/img/favicon.png') }}" rel="icon">
-    <link href=" {{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href=" {{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -37,7 +37,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-   
+
     @yield('style')
 </head>
 

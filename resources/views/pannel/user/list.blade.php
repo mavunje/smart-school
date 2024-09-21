@@ -1,4 +1,4 @@
-@extends('pannel.layouts.app')
+ @extends('pannel.layouts.app')
 
 @section('content')
     <div class="pagetitle">
@@ -39,8 +39,8 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
+                                    <th scope="col">Photo</th>
                                     <th scope="col">Date</th>
-
                                     <th scope="col">Action</th>
 
                                 </tr>
@@ -53,6 +53,14 @@
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->role_name }}</td>
+
+
+                                        <td>
+                                            @if($value->photo)
+                                                <img src="{{ asset('uploads/photos/' .$value->photo) }}" alt="Photo" width="50">
+                                            @endif
+                                        </td>
+
                                         <td>{{ $value->created_at }}</td>
                                         <td>
 
