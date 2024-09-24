@@ -12,6 +12,8 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ApplicantController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login']);
@@ -79,9 +81,16 @@ Route::get('admin/viewstudent', function () {
     return view('admin.viewstudent'); // Ensure this file exists at resources/views/admin/viewstudent.blade.php
 });
 
- //WORKERS CONTROLLER
+ //WORKERS ROUTE
 Route::resource('workers', WorkerController::class);
 
+// STUDENT ROUTE
+Route::resource('students', StudentController::class);
+
+Route::get('/students/download', [StudentController::class, 'download'])->name('students.download');
+
+//APPLICANTS ROUTE
+Route::resource('applicants', ApplicantController::class);
 
 //POSITION CONTROLLER
 Route::resource('position', PositionController::class);

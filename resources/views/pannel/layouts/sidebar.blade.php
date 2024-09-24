@@ -77,13 +77,13 @@
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="forms-elements.html">
-                            <i class="bi bi-circle"></i><span>Fees payments</span>
+                        <a href="{{ url('students') }}">
+                            <i class="bi bi-circle"></i><span>Students</span>
                         </a>
                     </li>
                     <li>
-                        <a href="forms-layouts.html">
-                            <i class="bi bi-circle"></i><span>Form Payments</span>
+                        <a href="{{ url('applicants') }}">
+                            <i class="bi bi-circle"></i><span>Applications</span>
                         </a>
                     </li>
                     <li>
