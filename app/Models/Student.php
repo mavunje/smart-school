@@ -9,6 +9,7 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
+        'applicant_id',
         'full_name',
         'dob',
          'email',
@@ -25,4 +26,12 @@ class Student extends Model
         'student_photo', // Student photo
         'parent_photo', // Parent photo
     ];
+
+
+      // Relationship: One Student belongs to one Applicant
+      public function applicant()
+      {
+          return $this->belongsTo(Applicant::class);
+      }
+
 }

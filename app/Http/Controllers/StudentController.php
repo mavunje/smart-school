@@ -1,78 +1,70 @@
 <?php
 namespace  App\Http\Controllers;
 use App\Models\Student;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
-class StudentController extends Controller
-{
-    /**
-     * Display a listing of the resource with optional search functionality.
-     */
-    public function index(Request $request)
-    {
-        // Fetch search term from query parameters
-        $search = $request->get('search');
-
-        // Query students with optional search
-        $students = Student::when($search, function ($query) use ($search) {
-            return $query->where('full_name', 'LIKE', "%{$search}%")
-                         ->orWhere('nationality', 'LIKE', "%{$search}%")
-                         ->orWhere('religion', 'LIKE', "%{$search}%");
-        })->paginate(5); // Set pagination as needed
-
-        // Get counts for various time periods
-        $totalStudents = Student::count();
-
-         // Iterate over each student to calculate time passed since registration
-         foreach ($students as $student) {
-            $student->time_since_registration = $student->created_at->diffForHumans();
-        }
-
-
-        // Get today's date without time
-$todayDate = now()->format('Y-m-d');
-
-// Get all students registered today
-$studentsToday = Student::whereDate('created_at', $todayDate)->get();
-
-// Count total students registered today
-$totalToday = $studentsToday->count();
-
-// Calculate time passed since first student registered today
-$timePassedSinceFirst = $studentsToday->isEmpty()
-    ? "No students registered today yet."
-    : $studentsToday->first()->created_at->diffForHumans();
-
-
-        $registeredLastHour = Student::where('created_at', '>=', now()->subHour())->count();
-        $registeredLastWeek = Student::where('created_at', '>=', now()->subWeek())->count();
-        $registeredLastMonth = Student::where('created_at', '>=', now()->subMonth())->count();
-        $registeredThisYear = Student::where('created_at', '>=', now()->startOfYear())->count();
-
-        // Count total male and female students
-        $totalMaleStudents = Student::where('gender', 'male')->count();
-        $totalFemaleStudents = Student::where('gender', 'female')->count();
-
-        // Count for specified time intervals
-        $registered1SecondAgo = Student::where('created_at', '>=', now()->subSeconds(1))->count();
-        $registered1MinuteAgo = Student::where('created_at', '>=', now()->subMinutes(1))->count();
-        $registered1HourAgo = Student::where('created_at', '>=', now()->subHours(1))->count();
-        $registered1DayAgo = Student::where('created_at', '>=', now()->subDays(1))->count();
-        $registered1WeekAgo = Student::where('created_at', '>=', now()->subWeeks(1))->count();
-        $registered1MonthAgo = Student::where('created_at', '>=', now()->subMonths(1))->count();
-        $registered1YearAgo = Student::where('created_at', '>=', now()->subYears(1))->count();
+class StudentController extends Controller {
 
 
 
-        return view('students.index', compact(
-            'students', 'search', 'totalStudents','totalToday','timePassedSinceFirst','registeredLastHour','registeredLastWeek',
-            'registeredLastMonth', 'registeredThisYear', 'totalMaleStudents','totalFemaleStudents',
-            'registered1SecondAgo', 'registered1MinuteAgo', 'registered1HourAgo','registered1DayAgo',
-            'registered1WeekAgo','registered1MonthAgo','registered1YearAgo'
-        ));
+    protected $studentService;
+
+    public function __construct( StudentService $studentService ) {
+        $this->studentService = $studentService;
     }
+    // student service layer for search ends
+
+    public function index(Request $request)
+{
+    $search = $request->get('search');
+    $students = $this->studentService->searchStudents($search, 5);
+
+    // Get total student count
+    $totalStudents = $this->studentService->getTotalStudentCount();
+
+    // Get today's registration count
+    $studentsToday = $this->studentService->getTodayRegistrationCount();
+
+    // Time since first student registered today
+    $timePassedSinceFirst = $this->studentService->getTimeSinceFirstStudentRegisteredToday();
+
+    // Time since registration for each student
+    $studentsWithTime = $this->studentService->getTimeSinceRegistrationForEachStudent($students);
+
+    // Get students registered in the last hour, week, month, year
+    $registeredLastHour = $this->studentService->getRegisteredLastHour();
+    $registeredLastWeek = $this->studentService->getRegisteredLastWeek();
+    $registeredLastMonth = $this->studentService->getRegisteredLastMonth();
+    $registeredThisYear = $this->studentService->getRegisteredThisYear();
+
+    // Get gender-specific student counts
+    $genderCounts = $this->studentService->getGenderCounts();
+    $totalMaleStudents = $genderCounts['male'];
+    $totalFemaleStudents = $genderCounts['female'];
+
+    // Get students registered within the last minute (dynamic interval example)
+    $registered1MinuteAgo = $this->studentService->getRegisteredWithinInterval('minute');
+
+
+// Get the day with the highest registration rate
+$registrationStats = $this->studentService->getDayWithHighestRegistrationRate();
+
+
+    // Pass data to the view
+    return view('students.index', [
+        'students' => $studentsWithTime,'totalStudents' => $totalStudents,'studentsToday' => $studentsToday,
+        'timePassedSinceFirst' => $timePassedSinceFirst,'registeredLastHour' => $registeredLastHour,
+        'registeredLastWeek' => $registeredLastWeek,'registeredLastMonth' => $registeredLastMonth,
+        'registeredThisYear' => $registeredThisYear,'totalMaleStudents' => $totalMaleStudents,
+        'totalFemaleStudents' => $totalFemaleStudents,'registered1MinuteAgo' => $registered1MinuteAgo,
+        'registrationRates' => $registrationStats['data'],
+    'highestRateDay' => $registrationStats['day'],'highestRatePercentage' => $registrationStats['highest_percentage']
+    ]);
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -149,15 +141,15 @@ $timePassedSinceFirst = $studentsToday->isEmpty()
             'citizenship' => 'required|string|max:255',
             'religion' => 'required|string|max:255',
             'gender' => 'required|in:male,female', // Validation for gender
-            'email' => 'required|email|unique:students,email,' . $student->id, // Validation for email
+            'email' => 'required|email|unique:students,email, ' . $student->id, // Validation for email
             'parent_full_name' => 'required|string|max:255',
             'parent_nationality' => 'required|string|max:255',
             'parent_citizenship' => 'required|string|max:255',
             'parent_address' => 'required|string|max:255',
             'parent_residence' => 'required|string|max:255',
             'previous_schools' => 'nullable|string',
-            'student_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'parent_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'student_photo' => 'nullable|image|mimes:jpg, jpeg, png|max:2048',
+            'parent_photo' => 'nullable|image|mimes:jpg, jpeg, png|max:2048',
         ]);
 
         // Handle student photo update
@@ -213,26 +205,27 @@ $timePassedSinceFirst = $studentsToday->isEmpty()
 
         // Set headers for CSV download
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+        header('Content-Disposition: attachment;
+        filename = "' . $csvFileName . '"');
 
         // Add CSV header
-        fputcsv($handle, ['ID', 'Full Name', 'Nationality', 'Religion', 'Gender', 'Email', 'Parent Full Name', 'Student Photo', 'Parent Photo']);
+        fputcsv($handle, ['ID', 'Full Name', 'Nationality', 'Religion', 'Gender', 'Email', 'Parent Full Name', 'Student Photo', 'Parent Photo' ] );
 
         // Add student data to CSV
-        foreach ($students as $student) {
-            fputcsv($handle, [
+        foreach ( $students as $student ) {
+            fputcsv( $handle, [
                 $student->id,
                 $student->full_name,
                 $student->nationality,
                 $student->religion,
                 $student->gender, // Include gender in CSV
                 $student->email,  // Include email in CSV
-                Storage::url($student->student_photo),
-                Storage::url($student->parent_photo),
-            ]);
+                Storage::url( $student->student_photo ),
+                Storage::url( $student->parent_photo ),
+            ] );
         }
 
-        fclose($handle);
+        fclose( $handle );
         exit;
     }
 }

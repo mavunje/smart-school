@@ -23,7 +23,7 @@
             <input type="date" class="form-control" name="dob" id="dob" required>
         </div>
 
-        
+
         <div class="form-group mb-3">
             <label for="email"><strong>Email</strong></label>
             <input type="email" class="form-control" name="email" id="email" required>

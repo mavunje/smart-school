@@ -36,7 +36,7 @@
                                     <i class="bi bi-people"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>{{ $totalStudents }}</h6></h6>
+                                    <h6>{{ $totalStudents }}</h6>
                                     <span class="text-success small pt-1 fw-bold">12%</span> <span
                                         class="text-muted small pt-2 ps-1">increase</span>
 
@@ -59,11 +59,14 @@
                                     <h6>Filter</h6>
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Registered  {{ $timePassedSinceFirst}}  Second Ago:</a></li>
-                                <li><a class="dropdown-item" href="#">Registered  {{ $registered1HourAgo }} Hour Ago:</a></li>
-                                <li><a class="dropdown-item" href="#">Registered {{ $registered1WeekAgo }} Week Ago: </a></li>
+
+                                <li><a class="dropdown-item" href="#">Registered Today={{ $timePassedSinceFirst}}</a></li>
+                                <li><a class="dropdown-item" href="#">Registered Last Hour={{$registeredLastHour }}: </a></li>
+                                <li><a class="dropdown-item" href="#">Registered Last Week={{$registeredLastWeek }}: </a></li>
                             </ul>
                         </div>
+
+
 
                         <div class="card-body">
                             <h2 class="card-title"><b>REGISTERED TODAY</b></h2>
@@ -73,9 +76,11 @@
                                     <i class="bi bi-people"></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6> {{$totalToday}}</h6>
+                                    <h6> {{$studentsToday}}</h6>
+
                                     <span class="text-success small pt-1 fw-bold">8%</span> <span
                                         class="text-muted small pt-2 ps-1">increase</span>
+
 
                                 </div>
                             </div>
@@ -257,9 +262,9 @@
                 @foreach ($students as $student)
                     <tr>
                         <td>{{ $student->id }}</td>
-                        <td>{{ $student->full_name }}</td>
+                        <td><a href="{{ route('students.show',$student->id) }}">{{ $student->full_name }}</a></td>
                         <td>{{ $student->nationality }}</td>
-                        <td>{{ $student->religion }}{{ $student->religion }}</td>
+                        <td>{{ $student->religion }}</td>
                         <td>{{ $student->parent_full_name }}</td>
 
                         <td>- Registered {{ $student->time_since_registration }}</td>
@@ -280,6 +285,7 @@
 
         {{ $students->links() }} <!-- Pagination -->
     </div>
+
 @endsection
 
 

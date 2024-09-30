@@ -14,9 +14,11 @@ use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicantController;
+use App\Services\StudentService;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'login']);
+
+Route::get('auth/login', [AuthController::class, 'login']);
 
 Route::get('pannel/transport', function () {
 
@@ -25,7 +27,7 @@ Route::get('pannel/transport', function () {
 });
 
 //AUTH LOGIN ROUTE
-Route::post('/', [AuthController::class, 'auth_login']);
+Route::post('auth/login', [AuthController::class, 'auth_login']);
 
 Route::get('logout', [AuthController::class, 'logout']);
 
@@ -96,3 +98,37 @@ Route::resource('applicants', ApplicantController::class);
 Route::resource('position', PositionController::class);
 
 Route::middleware('auth')->get('/user-info', [UserController::class, 'getUserInfo']);
+
+
+
+Route::get('parents/dashboard', function () {
+
+    return view('parents.dashboard');
+
+});
+
+// FRONTSITE ROUTES OF THE APPLICATION
+
+// Home Route
+Route::get('/', function () { return view('frontsite.index'); });
+
+Route::prefix('frontsite')->group(function () {
+
+    // About Route
+    Route::get('/about', function () { return view('frontsite.about'); });
+
+    // Courses Route
+    Route::get('/courses', function () { return view('frontsite.courses'); });
+
+    // Trainers Route
+    Route::get('/trainers', function () { return view('frontsite.trainers'); });
+
+    // Events Route
+    Route::get('/events', function () { return view('frontsite.events'); });
+
+    // Pricing Route
+    Route::get('/pricing', function () { return view('frontsite.pricing'); });
+
+    // Contact Route
+    Route::get('/contact', function () { return view('frontsite.contact'); });
+});

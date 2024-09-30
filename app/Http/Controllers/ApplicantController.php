@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Student;
+use App\Models\Interview; // Import the Interview model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -31,8 +33,6 @@ class ApplicantController extends Controller
 foreach ($applicants as $applicant) {
    $applicant->time_since_registration = $applicant->created_at->diffForHumans();
 }
-
-
 
 
     $appliedToday = Applicant::whereDate('created_at', now())->count();

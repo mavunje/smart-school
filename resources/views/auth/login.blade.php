@@ -64,7 +64,7 @@
         <div class="login-page container-fluid login-container">
 
             <div class="login-box">
-                <h4 class="fs-4 fw-bold text-center py-3 text-primary">SCHOOL MANAGEMENT SYSTEM</h4>
+                <h4 class="fs-4 fw-bold text-center py-3 text-success"> KAENGESA SCHOOL MANAGEMENT SYSTEM</h4>
                 <div class="card p-4 mb-4">
                     <div class="card-body">
                         <div class="pt-2 pb-2 mb-3 border-bottom ">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Login</button>
+                                <button class="btn btn-success w-100" type="submit">Login</button>
                             </div>
                         </form>
                     </div>

@@ -6,7 +6,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ url('pannel/dashboard') }}" class="logo d-flex align-items-center" style="text-decoration: none">
 
-            <span class="d-none d-lg-block">ST.Joseph Kaengesa-Seminary</span>
+            <span class="d-none d-lg-block text-success">ST.Joseph Kaengesa-Seminary</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -14,11 +14,17 @@
 
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <form id="searchForm" class="search-form d-flex align-items-center" method="POST" action="#">
+            @csrf <!-- Include CSRF token for security -->
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword" id="searchInput">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
+
+    <!-- Section for displaying search results -->
+    <div id="searchResults" class="mt-3"></div>
+
+
 
 
     <nav class="header-nav ms-auto">
@@ -223,3 +229,4 @@
     </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
+

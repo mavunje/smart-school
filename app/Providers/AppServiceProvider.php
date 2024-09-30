@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\pagination\paginator;
+use Illuminate\Pagination\Paginator;
+use App\Services\StudentService; // Import the StudentService
+use Illuminate\Support\Facades\View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        paginator::useBootstrapFive();
+        Paginator::useBootstrapFive();
+
+        // View composer to share StudentService with all views
+        View::composer('*', function ($view) {
+            $view->with('studentService', app(StudentService::class)); // Inject the StudentService
+        });
     }
 }

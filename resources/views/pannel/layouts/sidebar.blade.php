@@ -205,6 +205,12 @@
                 </a>
                 <ul id="parent-section" class="nav-content collapse " data-bs-parent="#parent-section">
                     <li>
+                        <a href="{{ url('parents/dashboard') }}">
+                            <i class="bi bi-circle"></i><span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{ url('admin/viewstudent') }}">
                             <i class="bi bi-circle"></i><span>Profile</span>
                         </a>
